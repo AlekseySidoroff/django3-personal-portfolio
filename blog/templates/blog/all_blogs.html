@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                Alex Sidoroff
+            </a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'blog:all_blogs' %}">Блог <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="display-3">Блоги</h3>
+        <p class="text-secondary">Всего {{ blog_records.count }} записи</p>
+
+        {% for record in blog_records %}
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'blog:detail' record.id %}"><h5 class="card-title">{{ record.title }}</h5></a>
+                <p class="text-right">{{ record.date|date:"d-m-Y h:i" }}</p>
+                <p class="card-text">{{ record.text|safe|truncatechars:280 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

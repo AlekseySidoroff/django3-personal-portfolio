@@ -1,0 +1,27 @@
+{% extends 'portfolio/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col text-center" style="margin: 50px 0">
+                <img src="{% static 'portfolio/DSCF7267.jpg' %}" class="rounded d-block" style="max-height: 200px; width: auto" alt="...">
+            </div>
+        </div>
+        <div class="container"><div class="row row-cols-4">
+        {% for project in projects %}
+        <div class="card" style="margin: 20px;">
+            <img src="{{ project.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                {% if project.url %}
+                <a href="{{ project.url }}" class="card-link" target="_blank">Go somewhere</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        </div></div>
+
+{% endblock %}

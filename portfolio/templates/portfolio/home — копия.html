@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>My Portfolio</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                Alex Sidoroff
+            </a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'blog:all_blogs' %}">Блог <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col text-center" style="margin: 50px 0">
+                <img src="{% static 'portfolio/DSCF7267.jpg' %}" class="rounded d-block" style="max-height: 200px; width: auto" alt="...">
+            </div>
+        </div>
+        <div class="row">
+        {% for project in projects %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ project.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                {% if project.url %}
+                <a href="{{ project.url }}" class="card-link" target="_blank">Go somewhere</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
